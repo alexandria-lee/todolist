@@ -45,7 +45,9 @@ struct BrainDumpView: View {
                         }
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
+            .background(Theme.background)
             .navigationTitle("Brain Dump")
         }
     }

@@ -2,7 +2,7 @@
 
 ## What this is
 An ADHD-friendly todo list app for iOS (and eventually iPadOS / Mac Catalyst).
-Built with **SwiftUI** + **EventKit**, targeting **iOS 17.6+**.
+Built with **SwiftUI** + **EventKit**, targeting **iOS 26.0+**.
 
 ## Design philosophy
 The app exists to **reduce friction and decision fatigue**, not to be a comprehensive task manager.

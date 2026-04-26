@@ -10,7 +10,8 @@ struct FocusTimerView: View {
         NavigationStack {
             VStack(spacing: 32) {
                 Text("Pomodoro")
-                    .font(.title.bold())
+                    .font(.system(.title, design: .serif))
+                    .foregroundStyle(Theme.ink)
 
                 ZStack {
                     Circle()
@@ -53,6 +54,8 @@ struct FocusTimerView: View {
                 Spacer()
             }
             .padding(.top, 32)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Theme.background)
             .navigationTitle("Focus")
             .navigationBarTitleDisplayMode(.inline)
         }

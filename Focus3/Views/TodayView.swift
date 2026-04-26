@@ -4,22 +4,32 @@ import EventKit
 struct TodayView: View {
     @EnvironmentObject var store: TaskStore
     @EnvironmentObject var eventKit: EventKitService
+    @State private var quote: String = Quotes.random()
 
     var body: some View {
         NavigationStack {
             List {
-                // ── Dopamine header ──
+                // ── Claude-style header ──
                 Section {
-                    HStack {
-                        Text(greeting)
-                            .font(.title2.bold())
-                        Spacer()
-                        if store.completedToday > 0 {
-                            Label("\(store.completedToday) done", systemImage: "checkmark.seal.fill")
-                                .foregroundStyle(.green)
-                                .font(.subheadline.bold())
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text(greeting)
+                                .font(.system(.largeTitle, design: .serif))
+                                .foregroundStyle(Theme.ink)
+                            Spacer()
+                            if store.completedToday > 0 {
+                                Label("\(store.completedToday) done", systemImage: "checkmark.seal.fill")
+                                    .foregroundStyle(Theme.coral)
+                                    .font(.subheadline.weight(.semibold))
+                            }
                         }
+                        Text(quote)
+                            .font(.system(.callout, design: .serif).italic())
+                            .foregroundStyle(.secondary)
                     }
+                    .padding(.vertical, 8)
+                    .listRowBackground(Theme.background)
+                    .listRowSeparator(.hidden)
                 }
 
                 // ── Today's 3 ──
@@ -58,7 +68,8 @@ struct TodayView: View {
                     }
                 }
             }
-            .navigationTitle("Focus3")
+            .scrollContentBackground(.hidden)
+            .background(Theme.background)
             .refreshable { await eventKit.refresh() }
         }
     }
@@ -66,10 +77,10 @@ struct TodayView: View {
     private var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
-        case 5..<12:  return "Good morning ☀️"
+        case 5..<12:  return "Good morning"
         case 12..<17: return "Good afternoon"
         case 17..<22: return "Good evening"
-        default:      return "Late night 🌙"
+        default:      return "Late night"
         }
     }
 }
